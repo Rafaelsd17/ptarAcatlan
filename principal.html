@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Planta de Tratamiento</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script defer src="script.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F8F9FA;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .en-construccion {
+            text-align: center;
+            padding: 40px;
+            font-style: italic;
+            color: #666;
+            font-size: 1.2em;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f8f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Barra de navegación */
+        nav {
+            background-color: #004d40;
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        nav .menu a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 16px;
+            background-color: #00bfa5;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav .menu a:hover {
+            background-color: #00796b;
+        }
+
+        .contenido-calculadora {
+            background-color: #e0f7fa;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .calculadora-container {
+            text-align: center;
+        }
+
+        .calculadora-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #00796b;
+        }
+
+        .calculadora-header p {
+            font-size: 1.1em;
+            color: #004d40;
+            margin-bottom: 30px;
+        }
+
+        .calculadora-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .calculadora-form label {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #004d40;
+            margin-bottom: 10px;
+        }
+
+        .calculadora-form input[type="number"] {
+            width: 80%;
+            padding: 12px;
+            border: 2px solid #00796b;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .calculadora-form input[type="number"]:focus {
+            border-color: #004d40;
+        }
+
+        .calculadora-form button {
+            background-color: #00796b;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .calculadora-form button:hover {
+            background-color: #004d40;
+        }
+
+        .resultado {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #004d40;
+            display: none;
+        }
+
+        .resultado h3 {
+            font-size: 2em;
+            color: #00796b;
+        }
+
+        .resultado p {
+            font-size: 1.2em;
+        }
+
+        .impacto-imagen {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="logos">
+            <img src="PTAR-L.png" alt="PTAR-L" class="logoPTAR">
+            <a href="https://www.acatlan.unam.mx/">
+                <img src="FES-A-L.png" alt="FES-A-L" class="logoFES">
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <nav class="navbar">
+            <ul>
+                <li><a href="#inicio" class="nav-link active"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#nosotros" class="nav-link"><i class="fas fa-users"></i> Nosotros</a></li>
+                <li><a href="#servicios" class="nav-link"><i class="fas fa-cogs"></i> Servicios</a></li>
+                <li><a href="#contacto" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a></li>
+                <li><a href="#calculadora" class="nav-link" onclick="mostrarCalculadora()"><i class="fas fa-water"></i> Calculadora impacto ambiental</a></li>
+                <li><a href="#ingresar" class="nav-link" id="btnIngresar"><i class="fas fa-sign-in-alt"></i> Ingresar</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <section id="contenido">
+            <!-- Sección Inicio -->
+            <div id="seccion-inicio" class="inicio-wrapper">
+                <div class="info-curiosidades">
+                    <div class="intro-container">
+                        <div class="intro-texto">
+                            <h1>Planta de Tratamiento de Aguas Residuales de la FES Acatlán</h1>
+                            <p>
+                                La Planta de Tratamiento de Aguas Residuales de la FES Acatlán nace con un propósito claro: aprovechar el agua residual generada en nuestras instalaciones para el riego de áreas verdes. Esta iniciativa no solo reduce el impacto ambiental, sino que promueve el uso responsable del recurso hídrico y fortalece el compromiso de nuestra comunidad con la sustentabilidad.
+                            </p>
+                        </div>
+                        <div class="intro-imagen">
+                            <img src="imagen_intro.jpg" alt="Imagen de la planta">
+                        </div>
+                    </div>
+            <!-- Sección ¿Sabías que? -->
+            <div class="sabias-que-section">
+                <h2 class="sabias-titulo"><i class="fas fa-lightbulb"></i> ¿Sabías que...?</h2>
+                <div class="sabias-que-carousel">
+                    <div class="sabias-card">
+                        <img src="Sabías.png" alt="Icono agua">
+                            <h3>💧 El agua de los bebederos NO viene de la planta</h3>
+                            <p>Existe una creencia común de que el agua que se bebe en la FES Acatlán proviene de la planta de tratamiento, pero esto es falso. El agua de los bebederos es suministrada directamente del pozo de la institución y pasa por un proceso adicional de purificación que la hace apta para el consumo humano.</p>
+                    </div>
+                    <div class="sabias-card">
+                        <img src="Sabías.png" alt="Icono energía">
+                            <h3>🎓Puedes hacer tu servicio social</h3>
+                            <p>Además de tratar el agua, la planta es un espacio activo de formación. Los estudiantes de distintas carreras pueden realizar aquí su servicio social, participando en tareas técnicas, monitoreo, difusión ambiental o apoyo en operación, lo que fortalece su aprendizaje práctico y conciencia ecológica.</p>
+                    </div>
+                    <div class="sabias-card">
+                            <img src="Sabías.png" alt="Icono reciclaje">
+                            <h3>🌿 ¿Sabías que regamos con agua tratada?</h3>
+                            <p>Toda el agua que se utiliza para el riego de las áreas verdes de la FES Acatlán proviene de la planta de tratamiento. Gracias a esto, se reduce significativamente el consumo de agua potable del pozo, lo que contribuye al cuidado del recurso hídrico y a una gestión ambientalmente responsable.</p>
+                    </div>
+                    <div class="sabias-card">
+                        <img src="Sabías.png" alt="Icono monitoreo">
+                        <h3>🔍 Supervisión las 24 horas</h3>
+                        <p>La operación de la planta está bajo monitoreo constante para asegurar que el agua tratada cumpla con los parámetros de calidad establecidos. Esta vigilancia permanente permite detectar y corregir cualquier anomalía de manera inmediata, garantizando seguridad y eficiencia en todo momento.</p>
+                    </div>
+                    <div class="sabias-card">
+                        <img src="Sabías.png" alt="Icono educación">
+                    <h3>⚙️ Tecnología limpia y eficiente</h3>
+            <p>La planta utiliza un tren de tratamiento compuesto por rejas, sedimentador, filtros y desinfección ultravioleta (UV), lo que permite limpiar el agua sin necesidad de productos químicos agresivos. Este sistema no solo es efectivo, sino que también es amigable con el medio ambiente.</p>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <div class="tarjetas-video">
+        <h2 class="titulo-tarjetas"><i class="fas fa-industry"></i> Funcionamiento de la planta y uso del agua tratada</h2>
+        <div class="informacion">
+            <a href="#" class="card" data-descripcion="La planta cuenta con un tren de tratamiento diseñado para asegurar la calidad del agua tratada antes de su reutilización. El proceso comienza con rejas que retienen residuos sólidos grandes, seguido por un sedimentador que separa los sólidos suspendidos. Posteriormente, el agua pasa por filtros especiales que eliminan impurezas más finas. Finalmente, se aplica un sistema de desinfección con luz ultravioleta (UV), el cual elimina patógenos y microorganismos sin añadir químicos al agua. Este sistema garantiza un tratamiento eficiente, ecológico y seguro para el uso en áreas verdes.">
+                <img src="tratamiento_agua.jpg" alt="Planta de tratamiento">
+                <p><strong>TREN DE TRATAMIENTO</strong><br>
+                La planta cuenta con un tren de tratamiento que incluye rejas, sedimentador, filtros y desinfección UV, logrando remover eficientemente sólidos y microorganismos.
+            </p>
+            </a>
+            <a href="#" class="card" data-descripcion="El agua tratada en la planta se destina principalmente al riego de jardines, áreas verdes y zonas comunes dentro de la FES Acatlán. Esta práctica reduce significativamente el consumo de agua potable proveniente del pozo del campus, lo que representa un ahorro importante y una acción concreta hacia la sustentabilidad. Además de su impacto ambiental, esta reutilización promueve una cultura del cuidado del agua entre estudiantes, docentes y personal administrativo.">
+
+                <img src="sustentabilidad.jpg" alt="Sustentabilidad">
+                <p><strong>APROVECHAMIENTO DEL AGUA</strong><br>
+                El agua tratada se reutiliza para el riego de áreas verdes, reduciendo el consumo del pozo y promoviendo la sustentabilidad en el campus.
+            </p>
+            </a>
+            <a href="#" class="card" data-descripcion="La planta no solo cumple una función ambiental, sino también educativa. Sirve como un espacio didáctico donde estudiantes de diversas disciplinas pueden conocer de cerca el proceso de tratamiento de aguas residuales, realizar prácticas y desarrollar proyectos enfocados en la ingeniería ambiental, sostenibilidad y gestión de recursos. Además, fomenta la conciencia ecológica en la comunidad universitaria, al demostrar con hechos el compromiso institucional con el medio ambiente.">
+
+                <img src="equipo_trabajo.jpg" alt="Equipo de trabajo">
+                <p><strong>BENEFICIOS Y EDUCACIÓN</strong><br>
+                La planta contribuye a la formación académica de estudiantes y fomenta conciencia ecológica entre la comunidad universitaria.
+            </p>
+            </a>
+        </div>
+
+
+        <!-- Video sobre la planta -->
+<div class="video-section" style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 40px;">
+    <div class="video-text">
+
+        <h2 class="video-title"><i class="fas fa-video"></i> Tratamiento sustentable del agua en la FES Acatlán</h2>
+        <p>
+            La Planta de Tratamiento de Aguas Residuales (PTAR) de la FES Acatlán es un ejemplo de compromiso ambiental.
+            Mediante procesos como cribado, tratamiento biológico, aireación y desinfección, transforma aguas residuales 
+            en recurso útil para el riego de áreas verdes. Además, es un espacio educativo para alumnos que desean realizar 
+            su servicio social o prácticas profesionales, fomentando la conciencia ecológica y el aprendizaje práctico.
+        </p>
+    </div>
+    <div class="video-container" style="flex: 1; min-width: 300px;">
+        <iframe 
+            src="https://www.youtube.com/embed/SEzmvImnuNE"
+            title="Video explicativo sobre la planta de tratamiento"
+            frameborder="0"
+            style="width: 100%; height: 300px;"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+    </div>
+
+    </div>
+
+            <!-- Sección Nosotros -->
+            <div id="seccion-nosotros" style="display:none;" class="sobre-nosotros">
+                <h2>Equipo de Trabajo</h2>
+
+                <div class="equipo-area">
+                    <h3>Área Técnica</h3>
+                    <div class="tarjetas-equipo">
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>Andrea Gómez</h4>
+                            <p>Ingeniera ambiental</p>
+                        </div>
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>Juan Pérez</h4>
+                            <p>Especialista en sistemas hidráulicos</p>
+                        </div>
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>Laura Martínez</h4>
+                            <p>Técnica en operación de planta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="equipo-area">
+                    <h3>Área de Comunicación</h3>
+                    <div class="tarjetas-equipo">
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>María López</h4>
+                            <p>Responsable de difusión</p>
+                        </div>
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>Carlos Ruiz</h4>
+                            <p>Diseñador gráfico</p>
+                        </div>
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>Ana Torres</h4>
+                            <p>Relaciones públicas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="equipo-area">
+                    <h3>Área de Educación Ambiental</h3>
+                    <div class="tarjetas-equipo">
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>Jorge Hernández</h4>
+                            <p>Coordinador de talleres</p>
+                        </div>
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>Lucía Rivera</h4>
+                            <p>Facilitadora educativa</p>
+                        </div>
+                        <div class="card-persona">
+                            <img src="persona1.jpg" alt="Foto de perfil">
+                            <h4>David Morales</h4>
+                            <p>Encargado de contenido</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Servicios -->
+            <div id="seccion-servicios" style="display:none;">
+                <h2>Servicio Social</h2>
+                <div class="vacante">
+                    <h3>Asistente en Educación Ambiental</h3>
+                    <p><strong>Descripción:</strong> Apoyar en la planeación y ejecución de talleres dirigidos a estudiantes de nivel básico sobre el tratamiento de aguas residuales.</p>
+                    <p><strong>Requisitos:</strong> Estudiante de pedagogía, biología o áreas afines. Gusto por la enseñanza y trabajo con niños. Disponibilidad de 10 horas semanales.</p>
+                    <button onclick="mostrarFormulario('Educación Ambiental')">Postularse</button>
+                </div>
+                <div class="vacante">
+                    <h3>Diseñador de Material Gráfico</h3>
+                    <p><strong>Descripción:</strong> Crear infografías, posters y presentaciones visuales para campañas de concientización sobre el uso responsable del agua.</p>
+                    <p><strong>Requisitos:</strong> Estudiante de diseño gráfico o comunicación visual. Manejo básico de herramientas como Illustrator o Canva. Portafolio deseable.</p>
+                    <button onclick="mostrarFormulario('Diseño Gráfico')">Postularse</button>
+                </div>
+                <div class="vacante">
+                    <h3>Apoyo en Monitoreo de Planta</h3>
+                    <p><strong>Descripción:</strong> Brindar soporte en la recolección y registro de datos del funcionamiento diario de la planta de tratamiento.</p>
+                    <p><strong>Requisitos:</strong> Estudiante de ingeniería ambiental, química o áreas afines. Conocimientos básicos de análisis de agua. Disponibilidad por las mañanas.</p>
+                    <button onclick="mostrarFormulario('Monitoreo de Planta')">Postularse</button>
+                </div>
+
+                <div id="formulario-postulacion">
+                    <h3>Formulario de Postulación</h3>
+                    <form>
+                        <p><strong>Carrera:</strong> (elección)</p>
+<label for="carrera"></label>
+
+                        <select id="carrera" name="carrera">
+                            <optgroup label="Ciencias Físico-Matemáticas y de las Ingenierías">
+                                <option>Actuaría</option>
+                                <option>Ingeniería Civil</option>
+                                <option>Matemáticas Aplicadas y Computación</option>
+                            </optgroup>
+                            <optgroup label="Ciencias Sociales">
+                                <option>Ciencias Políticas y Administración Pública</option>
+                                <option>Derecho</option>
+                                <option>Relaciones Internacionales</option>
+                                <option>Sociología</option>
+                            </optgroup>
+                            <optgroup label="Humanidades y Artes">
+                                <option>Arquitectura</option>
+                                <option>Comunicación</option>
+                                <option>Diseño Gráfico</option>
+                                <option>Enseñanza de Inglés</option>
+                                <option>Filosofía</option>
+                                <option>Historia</option>
+                                <option>Lengua y Literatura Hispánicas</option>
+                                <option>Pedagogía</option>
+                                <option>Periodismo y Comunicación Colectiva</option>
+                            </optgroup>
+                            <optgroup label="División de Universidad Abierta, Continua y a Distancia (DUACyD)">
+                                <option>Derecho (Sistema Universidad Abierta y Educación a Distancia)</option>
+                                <option>Enseñanza de Alemán, Español, Francés, Inglés o Italiano como Lengua Extranjera (SUAyED)</option>
+                            </optgroup>
+                            <optgroup label="Otros">
+                                <option>Economía</option>
+                            </optgroup>
+                        </select>
+
+                        <p><strong>Número de cuenta:</strong> (campo que recibirá la información)</p>
+<label for="cuenta"></label>
+
+                        <input type="text" id="cuenta" name="cuenta" pattern="\d{9}" maxlength="9" required placeholder="9 dígitos">
+
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sección Contacto -->
+            <div id="seccion-contacto" style="display:none;">
+                <h2>Contáctanos</h2>
+                <div class="contacto-info" style="text-align:center; padding: 20px;">
+                    <p><strong>Ubicación:</strong> Planta de Tratamiento, FES Acatlán</p>
+                    <p><strong>Correo electrónico:</strong> <a href="mailto:planta.tratamiento@acatlan.unam.mx">planta.tratamiento@acatlan.unam.mx</a></p>
+                    <p><strong>Teléfono:</strong> 55 5623 1500 ext. 39871</p>
+                </div>
+            </div>
+            
+
+            <!-- Sección Ingresar -->
+            <div id="seccion-ingresar" style="display:none;">
+                <div class="login-container" id="loginContainer">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="loginForm">
+                        <input type="text" id="username" placeholder="Usuario" required>
+                        <input type="password" id="password" placeholder="Contraseña" required>
+                        <button type="submit">Ingresar</button>
+                    </form>
+                    <p id="error">Usuario o contraseña incorrectos</p>
+                </div>
+                <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      
+      // Credenciales predefinidas para el ejemplo
+      const validUsername = "admin";
+      const validPassword = "123456";
+      
+      if (username === validUsername && password === validPassword) {
+        window.location.href = "index.php";
+        document.getElementById("loginContainer").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      } else {
+        document.getElementById("error").style.display = "block";
+      }
+    });
+  </script>
+
+            </div>
+            <div class="contenido-calculadora" id="seccion-calculadora" style="display: none;">
+                <div class="calculadora-container">
+            <div class="calculadora-header">
+                <h2><i class="fas fa-water"></i> Calculadora de Impacto Ambiental</h2>
+                <p>Calcula el ahorro de agua potable gracias al uso de agua tratada en la FES Acatlán.</p>
+            </div>
+
+            <div class="calculadora-form">
+                <label for="metros">Metros cuadrados regados con agua tratada:</label>
+                <input type="number" id="metros" name="metros" min="1" placeholder="Introduce el área en m²" required>
+                <button type="button" onclick="calcularImpacto()">Calcular Ahorro</button>
+            </div>
+
+            <!-- Sección de Resultado -->
+            <div id="resultado" class="resultado">
+                <h3>¡Impacto Positivo!</h3>
+                <p>Has ahorrado <strong id="cantidad-ahorro"></strong> litros de agua.</p>
+                <img src="impacto.jpeg" alt="Ahorro de agua" class="impacto-imagen">
+            </div>
+        </div>
+            </div>
+
+        </section>
+    </div>
+    
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-contenido grande">
+            <div class="modal-imagen">
+                <img id="modal-img" src="" alt="Imagen ampliada">
+            </div>
+            <div class="modal-texto">
+                <span class="cerrar" onclick="cerrarModal()">&times;</span>
+                <h2 id="modal-titulo"></h2>
+                <p id="modal-texto"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Créditos -->
+    <div class="container">
+        <div class="creditos">
+            Hecho en México, todos los derechos reservados 2025.<br>
+            Esta página puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución.
+            <div class="imagen-final">
+                <a href="https://www.unam.mx/">
+                    <img src="UNAM-L.png" alt="UNAM-L" class="logoUNAM">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+
+    <div id="bloqueo-overlay" style="position: fixed; display: none; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0,0,0,0.6); z-index: 9999; color: white; font-size: 1.2em; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+
+    La sesión está activa en otra ventana.<br>No cierres esta página mientras esté abierta.
+</div>
+
+    <!-- Script de la Calculadora -->
+    <script>
+        function calcularImpacto() {
+            // Obtener el valor de los metros cuadrados regados
+            const metros = document.getElementById('metros').value;
+
+            // Validación de entrada
+            if (!metros || metros <= 0) {
+                alert("Por favor, introduce un número válido de metros cuadrados.");
+                return;
+            }
+
+            // Calcular el ahorro de agua (suponiendo que cada m² ahorra 0.5 litros)
+            const ahorro = metros * 0.5;
+
+            // Mostrar el resultado
+            document.getElementById('cantidad-ahorro').textContent = ahorro.toFixed(2);
+            document.getElementById('resultado').style.display = 'block';
+        }
+        
+    </script>
+
+
+
+</body>
+</html>
